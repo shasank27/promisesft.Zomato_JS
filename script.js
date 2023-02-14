@@ -14,7 +14,9 @@ window.addEventListener("load", () => {
     startSearchingforDeliveryPartners();
   });
   document.getElementById("deliverOrder").addEventListener("click", () => {
-    isOrderDelivered = true;
+    setTimeout(() => {
+      isOrderDelivered = true;
+    }, 2000);
   });
 
   checkIfOrderAccepted()
@@ -112,13 +114,14 @@ function getRandomValet() {
 }
 
 function checkIfOrderDelivered() {
+  console.log(isOrderDelivered, "checkIfOrderDelivered()");
   return new Promise((resolve, reject) => {
-    valetTimer = setInterval(() => {
+    valetDeliveryTimer = setInterval(() => {
       console.log("is order delivered by valet");
       if (isOrderDelivered) {
         resolve("order delivered valet details");
         updateOrderStatus();
-        clearTimeout();
+        clearTimeout(valetDeliveryTimer);
       }
     }, 1000);
   });
@@ -144,3 +147,10 @@ function updateValetDetails() {
     document.getElementById("call").classList.remove("none");
   }
 }
+
+// Promise - then,catch.   Callback - resolve, reject
+// Types of promise -
+// 1. Promise.all - saare operations call paralley, if one fails, promise.all fails
+// 2. Promise.allsettled - saare operations call paralley, if one fails - dont give a damn, promise.allsettles passes
+// 3. Promise.race - first promise to complete - whether it is resolved or rejected
+// 4. Promise.any - first promise to fullfil that is resolved/fullfilled
