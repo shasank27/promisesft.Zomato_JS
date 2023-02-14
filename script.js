@@ -120,8 +120,8 @@ function checkIfOrderDelivered() {
       console.log("is order delivered by valet");
       if (isOrderDelivered) {
         resolve("order delivered valet details");
-        updateOrderStatus();
         clearTimeout(valetDeliveryTimer);
+        updateOrderStatus();
       }
     }, 1000);
   });
@@ -133,8 +133,8 @@ function checkIfValetAssigned() {
       console.log(" searching for valet");
       if (isValetFound) {
         updateValetDetails();
-        resolve("updated valet details");
         clearTimeout(valetTimer);
+        resolve("updated valet details");
       }
     }, 1000);
   });
